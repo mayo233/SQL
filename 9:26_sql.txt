@@ -1,0 +1,660 @@
+suzukamichiyo@suzukamichiyo ~ % echo 'export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"' >> ~/.bash_profile\
+zsh: permission denied: /Users/suzukamayo/.bash_profile\
+suzukamichiyo@suzukamichiyo ~ % -> % source ~/.bash_profile\
+(base) suzukamichiyo@suzukamichiyo ~ % mysql --version\
+zsh: command not found: mysql\
+(base) suzukamichiyo@suzukamichiyo ~ % brew install mysql\
+Updating Homebrew...\
+\cf3 ==>\cf2  
+\f1\b Homebrew is run entirely by unpaid volunteers. Please consider donating:
+\f0\b0 \
+  \ul https://github.com/Homebrew/brew#donations\ulnone \
+\cf3 ==>\cf2  
+\f1\b Auto-updated Homebrew!
+\f0\b0 \
+Updated 1 tap (homebrew/core).\
+\cf3 ==>\cf2  
+\f1\b Updated Formulae
+\f0\b0 \
+Updated 88 formulae.\
+\
+\cf3 ==>\cf2  
+\f1\b Downloading https://ghcr.io/v2/homebrew/core/mysql/manifests/8.0.26-1
+\f0\b0 \
+Already downloaded: /Users/suzukamayo/Library/Caches/Homebrew/downloads/782c8cc2296e07218cebddd048ecac76c60540f77d5d0e4d116350f49aa7466a--mysql-8.0.26-1.bottle_manifest.json\
+\cf3 ==>\cf2  
+\f1\b Downloading https://ghcr.io/v2/homebrew/core/mysql/blobs/sha256:1cec65a2f5f219793c2f67c95108e2e
+\f0\b0 \
+Already downloaded: /Users/suzukamayo/Library/Caches/Homebrew/downloads/7d7649bd51b7f284c59855086ead1e2b91fba1497e25d690d2084b65f50ff68d--mysql--8.0.26.catalina.bottle.1.tar.gz\
+\cf3 ==>\cf2  
+\f1\b Pouring mysql--8.0.26.catalina.bottle.1.tar.gz
+\f0\b0 \
+\cf3 ==>\cf2  
+\f1\b Caveats
+\f0\b0 \
+We've installed your MySQL database without a root password. To secure it run:\
+    mysql_secure_installation\
+\
+MySQL is configured to only allow connections from localhost by default\
+\
+To connect run:\
+    mysql -uroot\
+\
+To start mysql:\
+  brew services start mysql\
+Or, if you don't want/need a background service you can just run:\
+  /usr/local/opt/mysql/bin/mysqld_safe --datadir=/usr/local/var/mysql\
+\cf3 ==>\cf2  
+\f1\b Summary
+\f0\b0 \
+
+\f2 \uc0\u55356 \u57210 
+\f0   /usr/local/Cellar/mysql/8.0.26: 304 files, 296.5MB\
+(base) suzukamichiyo@suzukamichiyo ~ % mysql --version   \
+mysql  Ver 8.0.26 for macos10.15 on x86_64 (Homebrew)\
+(base) suzukamichiyo@suzukamichiyo ~ % mysql.server start         \
+Starting MySQL\
+ SUCCESS! \
+(base) suzukamichiyo@suzukamichiyo ~ % 2021-09-25T21:37:54.6NZ mysqld_safe A mysqld process already exists\
+\
+(base) suzukamichiyo@suzukamichiyo ~ % ps aux | grep mysql       \
+suzukamichiyo    22868   0.0  0.0  4918792    520   ??  S    
+\f3 \'8b\'e0
+\f0 09PM   0:04.30 /usr/local/opt/mysql@5.6/bin/mysqld --basedir=/usr/local/opt/mysql@5.6 --datadir=/usr/local/var/mysql --plugin-dir=/usr/local/opt/mysql@5.6/lib/plugin --log-error=suzukamichiyo.local.err --pid-file=suzukamichiyo.local.pid\
+suzukamichiyo    22768   0.0  0.0  4271824      8   ??  S    
+\f3 \'8b\'e0
+\f0 09PM   0:00.03 /bin/sh /usr/local/opt/mysql@5.6/bin/mysqld_safe --datadir=/usr/local/var/mysql\
+suzukamichiyo    28594   0.0  0.0  4286716    712 s004  S+    6:38AM   0:00.00 grep mysql\
+(base) suzukamichiyo@suzukamichiyo ~ % kill 22868\
+(base) suzukamichiyo@suzukamichiyo ~ % kill 22768\
+kill: kill 22768 failed: no such process\
+(base) suzukamichiyo@suzukamichiyo ~ % mysql.server start  \
+Starting MySQL\
+ SUCCESS! \
+(base) suzukamichiyo@suzukamichiyo ~ % 2021-09-25T21:38:57.6NZ mysqld_safe A mysqld process already exists\
+\
+(base) suzukamichiyo@suzukamichiyo ~ % mysql -u root     \
+Welcome to the MySQL monitor.  Commands end with ; or \\g.\
+Your MySQL connection id is 1\
+Server version: 5.6.51 Homebrew\
+\
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.\
+\
+Oracle is a registered trademark of Oracle Corporation and/or its\
+affiliates. Other names may be trademarks of their respective\
+owners.\
+\
+Type 'help;' or '\\h' for help. Type '\\c' to clear the current input statement.\
+\
+mysql> exit\
+Bye\
+(base) suzukamichiyo@suzukamichiyo ~ % mysql -u root     \
+Welcome to the MySQL monitor.  Commands end with ; or \\g.\
+Your MySQL connection id is 2\
+Server version: 5.6.51 Homebrew\
+\
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.\
+\
+Oracle is a registered trademark of Oracle Corporation and/or its\
+affiliates. Other names may be trademarks of their respective\
+owners.\
+\
+Type 'help;' or '\\h' for help. Type '\\c' to clear the current input statement.\
+\
+mysql> create database pokemon;\
+Query OK, 1 row affected (0.02 sec)\
+\
+mysql> show databases;\
++--------------------+\
+| Database           |\
++--------------------+\
+| information_schema |\
+| mysql              |\
+| performance_schema |\
+| pokemon            |\
+| test               |\
++--------------------+\
+5 rows in set (0.04 sec)\
+\
+mysql> drop database pokemon;\
+Query OK, 0 rows affected (0.04 sec)\
+\
+mysql> show databases;\
++--------------------+\
+| Database           |\
++--------------------+\
+| information_schema |\
+| mysql              |\
+| performance_schema |\
+| test               |\
++--------------------+\
+4 rows in set (0.01 sec)\
+\
+mysql> create database pokemon;\
+Query OK, 1 row affected (0.03 sec)\
+\
+mysql> use pokemon;\
+Database changed\
+mysql> create table tbl_employee()\
+    -> code INTEGER,\
+    -> name VARCHAR(40),\
+    -> birthday DATETIME,\
+    -> dpt_code INTEGER,\
+    -> post_code INTEGER,\
+    -> manager INTEGER\
+    -> );\
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')\
+code INTEGER,\
+name VARCHAR(40),\
+birthday DATETIME,\
+dpt_code INTEGER,\
+post_code' at line 1\
+mysql> create table tbl_employee() code INTEGER, name VARCHAR(40), birthday DATETIME, dpt_code INTEGER, post_code INTEGER, manager INTEGER );\
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') code INTEGER, name VARCHAR(40), birthday DATETIME, dpt_code INTEGER, post_code' at line 1\
+mysql> create table tbl_employee(\
+    ->  code INTEGER,\
+    -> name VARCHAR(40),\
+    -> birthday DATETIME,\
+    -> dpt_code INTEGER,\
+    -> post_code INTEGER,\
+    -> manager INTEGER\
+    -> );\
+Query OK, 0 rows affected (0.08 sec)\
+\
+mysql> show tables from tbl_employee;\
+ERROR 1049 (42000): Unknown database 'tbl_employee'\
+mysql> show tables from pokemon;\
++-------------------+\
+| Tables_in_pokemon |\
++-------------------+\
+| tbl_employee      |\
++-------------------+\
+1 row in set (0.00 sec)\
+\
+mysql> create table pokemon_red(\
+    -> name VARCHAR(40), NOT NULL,\
+    -> type VARCHAR(40)\
+    -> );\
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NOT NULL,\
+type VARCHAR(40)\
+)' at line 2\
+mysql> show fields from tbl_employee;\
++-----------+-------------+------+-----+---------+-------+\
+| Field     | Type        | Null | Key | Default | Extra |\
++-----------+-------------+------+-----+---------+-------+\
+| code      | int(11)     | YES  |     | NULL    |       |\
+| name      | varchar(40) | YES  |     | NULL    |       |\
+| birthday  | datetime    | YES  |     | NULL    |       |\
+| dpt_code  | int(11)     | YES  |     | NULL    |       |\
+| post_code | int(11)     | YES  |     | NULL    |       |\
+| manager   | int(11)     | YES  |     | NULL    |       |\
++-----------+-------------+------+-----+---------+-------+\
+6 rows in set (0.04 sec)\
+\
+mysql> drop table tbl_employee;\
+Query OK, 0 rows affected (0.03 sec)\
+\
+mysql> create temporary table pokemon_red(\
+    -> name  VARCHAR(40),\
+    -> );\
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 3\
+mysql>  create temporary table pokemon_red(\
+    ->  name  VARCHAR(40),\
+    -> )\
+    -> ;\
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 3\
+mysql> create temporary table pokemon_red(  \
+    ->  type VARCHAR(40)\
+    -> );\
+Query OK, 0 rows affected (0.03 sec)\
+\
+mysql> create table pokemon_blue(\
+    -> type  VARCHAR(40) NOT NULL PRIMARY KEY\
+    -> );\
+Query OK, 0 rows affected (0.03 sec)\
+\
+mysql>  create table pokemon_blue1(\
+    -> type  VARCHAR(40) NOT NULL,ALTER TABLE tbl_employee ADD CONSTRAINT pkey PRIMARY KEY(code);\
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ALTER TABLE tbl_employee ADD CONSTRAINT pkey PRIMARY KEY(code)' at line 2\
+mysql> CREATE TABLE tablename(\
+    -> fieldname1 datatype1,\
+    -> fieldname2 datatype2,\
+    -> INDEX indexName(fieldname1,fieldnam2)\
+    -> ;\
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatype1,\
+fieldname2 datatype2,\
+INDEX indexName(fieldname1,fieldnam2)' at line 2\
+mysql> CREATE TABLE tablename(\
+    -> fieldname1 datatype1,\
+    -> fieldname2 datatype2,\
+    -> INDEX indexName(fieldname1,fieldnam2)\
+    -> )\
+    -> ;\
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatype1,\
+fieldname2 datatype2,\
+INDEX indexName(fieldname1,fieldnam2)\
+)' at line 2\
+mysql> show tables from pokemon;\
++-------------------+\
+| Tables_in_pokemon |\
++-------------------+\
+| pokemon_blue      |\
++-------------------+\
+1 row in set (0.01 sec)\
+\
+mysql> drop table pokemon_blue;\
+Query OK, 0 rows affected (0.02 sec)\
+\
+mysql> show tables from pokemon;\
+Empty set (0.01 sec)\
+\
+mysql> create table tbl_employee(\
+    -> code INTEGER,\
+    -> name  VARCHAR(40),\
+    -> birthday  VARCHAR(40),\
+    -> dpt_code INTEGER,\
+    -> post_code INTEGER,\
+    -> manager INTEGER\
+    -> );\
+Query OK, 0 rows affected (0.04 sec)\
+\
+mysql> show tables from pokemon;\
++-------------------+\
+| Tables_in_pokemon |\
++-------------------+\
+| tbl_employee      |\
++-------------------+\
+1 row in set (0.01 sec)\
+\
+mysql> /*\
+   /*> ************************************************************\
+   /*>  
+\f3 \'82\'b1\'82\'ea\'82\'c8\'82\'e7\'82\'ed\'82\'a9\'82\'e9
+\f0 SQL
+\f3 \'81\'40\'93\'fc\'96\'e5\'82\'cc\'93\'fc\'96\'e5
+\f0 \
+   /*> \
+   /*>  
+\f3 \'8d\'ec\'90\'ac\'8e\'d2
+\f0 :
+\f3 \'8c\'dc\'8f\'5c\'97\'92\'8b\'4d\'94\'56
+\f0 \
+   /*>  
+\f3 \'8d\'ec\'90\'ac\'93\'fa
+\f0 :2007.09.19\
+   /*> ************************************************************\
+   /*> */\
+mysql> \
+mysql> create database nyuumon;\
+Query OK, 1 row affected (0.02 sec)\
+\
+mysql> \
+mysql> use nyuumon;\
+Database changed\
+mysql> \
+mysql> create table tbl_department (\
+    ->     code        INTEGER     NOT NULL PRIMARY KEY,\
+    ->     name        VARCHAR(40)\
+    -> );\
+Query OK, 0 rows affected (0.02 sec)\
+\
+mysql> \
+mysql> create table tbl_post (\
+    ->     code        INTEGER     NOT NULL PRIMARY KEY,\
+    ->     name        VARCHAR(40)\
+    -> );\
+Query OK, 0 rows affected (0.03 sec)\
+\
+mysql> \
+mysql> create table tbl_employee (\
+    ->     code        INTEGER     NOT NULL PRIMARY KEY,\
+    ->     name        VARCHAR(40),\
+    ->     birthday    DATE,\
+    ->     dpt_code    INTEGER     NOT NULL,\
+    ->     post_code   INTEGER,\
+    ->     manager     INTEGER,\
+    ->     FOREIGN KEY(dpt_code) REFERENCES tbl_department(code),\
+    ->     FOREIGN KEY(post_code) REFERENCES tbl_post(code)\
+    -> );\
+\
+create table tbl_emp_log (\
+    code        INTEGER,\
+    name        VARCHAR(40),\
+    birthday    DATE,\
+    dpt_code    INTEGER,\
+    post_code   INTEGER,\
+    manager     INTEGER\
+);\
+\
+create table tbl_dpt_emp (\
+    dpt_code    INTEGER,\
+    dpt_name    VARCHAR(40),\
+    emp_code    INTEGER,\
+    emp_name    VARCHAR(40)\
+);\
+\
+create table tbl_salary (\
+    emp_code    INTEGER     NOT NULL PRIMARY KEY,\
+    salary      NUMERIC(14,0)\
+);\
+\
+create table tbl_parttimer (\
+    code        INTEGER     NOT NULL PRIMARY KEY,\
+    name        VARCHAR(40),\
+    birthday    DATE,\
+    dpt_code    INTEGER     NOT NULL,\
+    manager     INTEGER,\
+    FOREIGN KEY(dpt_code) REFERENCES tbl_department(code)\
+);\
+\
+create table tbl_period (\
+    period      INTEGER,\
+    start_date  DATE,\
+    end_date    DATE\
+);\
+\
+insert into tbl_department values (10,'
+\f3 \'91\'8d\'96\'b1\'95\'94
+\f0 ');\
+insert into tbl_department values (20,'
+\f3 \'89\'63\'8b\'c6\'95\'94
+\f0 ');\
+insert into tbl_department values (30,'
+\f3 \'8a\'4a\'94\'ad\'95\'94
+\f0 ');\
+\
+insert into tbl_post values (1,'
+\f3 \'8e\'d0\'92\'b7
+\f0 ');\
+Query OK, 0 rows affected (0.05 sec)\
+\
+mysql> \
+mysql> create table tbl_emp_log (\
+    ->     code        INTEGER,\
+    ->     name        VARCHAR(40),\
+    ->     birthday    DATE,\
+    ->     dpt_code    INTEGER,\
+    ->     post_code   INTEGER,\
+    ->     manager     INTEGER\
+    -> );\
+Query OK, 0 rows affected (0.01 sec)\
+\
+mysql> \
+mysql> create table tbl_dpt_emp (\
+    ->     dpt_code    INTEGER,\
+    ->     dpt_name    VARCHAR(40),\
+    ->     emp_code    INTEGER,\
+    ->     emp_name    VARCHAR(40)\
+    -> );\
+Query OK, 0 rows affected (0.03 sec)\
+\
+mysql> \
+mysql> create table tbl_salary (\
+    ->     emp_code    INTEGER     NOT NULL PRIMARY KEY,\
+    ->     salary      NUMERIC(14,0)\
+    -> );\
+Query OK, 0 rows affected (0.01 sec)\
+\
+mysql> \
+mysql> create table tbl_parttimer (\
+    ->     code        INTEGER     NOT NULL PRIMARY KEY,\
+    ->     name        VARCHAR(40),\
+    ->     birthday    DATE,\
+    ->     dpt_code    INTEGER     NOT NULL,\
+    ->     manager     INTEGER,\
+    ->     FOREIGN KEY(dpt_code) REFERENCES tbl_department(code)\
+    -> );\
+\
+create table tbl_period (\
+    period      INTEGER,\
+    start_date  DATE,\
+    end_date    DATE\
+);\
+\
+insert into tbl_department values (10,'
+\f3 \'91\'8d\'96\'b1\'95\'94
+\f0 ');\
+insert into tbl_department values (20,'
+\f3 \'89\'63\'8b\'c6\'95\'94
+\f0 ');\
+insert into tbl_department values (30,'
+\f3 \'8a\'4a\'94\'ad\'95\'94
+\f0 ');\
+\
+insert into tbl_post values (1,'
+\f3 \'8e\'d0\'92\'b7
+\f0 ');\
+insert into tbl_post values (2,'
+\f3 \'95\'94\'92\'b7
+\f0 ');\
+insert into tbl_post values (3,'
+\f3 \'8e\'9f\'92\'b7
+\f0 ');\
+insert into tbl_post values (4,'
+\f3 \'89\'db\'92\'b7
+\f0 ');\
+insert into tbl_post values (5,'
+\f3 \'8c\'57\'92\'b7
+\f0 ');\
+\
+insert into tbl_employee values (101,'
+\f3 \'97\'e9\'96\'d8\'88\'ea\'98\'59
+\f0 ','1972-02-01',10,3,NULL);\
+insert into tbl_employee values (102,'
+\f3 \'8d\'b2\'93\'a1\'89\'68\'8d\'ec
+\f0 ','1974-09-09',20,4,101);\
+insert into tbl_employee values (103,'
+\f3 \'8e\'52\'93\'63\'89\'d4\'8e\'71
+\f0 ','1976-05-21',10,4,101);\
+insert into tbl_employee values (104,'
+\f3 \'93\'63\'92\'86\'92\'42\'96\'e7
+\f0 ','1978-12-04',30,NULL,102);\
+insert into tbl_employee values (105,'
+\f3 \'8d\'82\'8b\'b4\'98\'61\'8e\'71
+\f0 ','1980-07-14',30,NULL,103);\
+\
+insert into tbl_salary values (101,325000);\
+insert into tbl_salary values (102,482000);\
+insert into tbl_salary values (103,236000);\
+insert intoQuery OK, 0 rows affected (0.04 sec)\
+\
+mysql> \
+mysql> create table tbl_period (\
+    ->     period      INTEGER,\
+    ->     start_date  DATE,\
+    ->     end_date    DATE\
+    -> );\
+Query OK, 0 rows affected (0.01 sec)\
+\
+mysql> \
+mysql> insert into tbl_department values (10,'
+\f3 \'91\'8d\'96\'b1\'95\'94
+\f0 ');\
+Query OK, 1 row affected (0.01 sec)\
+\
+mysql> insert into tbl_department values (20,'
+\f3 \'89\'63\'8b\'c6\'95\'94
+\f0 ');\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_department values (30,'
+\f3 \'8a\'4a\'94\'ad\'95\'94
+\f0 ');\
+Query OK, 1 row affected (0.03 sec)\
+\
+mysql> \
+mysql> insert into tbl_post values (1,'
+\f3 \'8e\'d0\'92\'b7
+\f0 ');\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_post values (2,'
+\f3 \'95\'94\'92\'b7
+\f0 ');\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_post values (3,'
+\f3 \'8e\'9f\'92\'b7
+\f0 ');\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_post values (4,'
+\f3 \'89\'db\'92\'b7
+\f0 ');\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_post values (5,'
+\f3 \'8c\'57\'92\'b7
+\f0 ');\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> \
+mysql> insert into tbl_employee values (101,'
+\f3 \'97\'e9\'96\'d8\'88\'ea\'98\'59
+\f0 ','1972-02-01',10,3,NULL);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_employee values (102,'
+\f3 \'8d\'b2\'93\'a1\'89\'68\'8d\'ec
+\f0 ','1974-09-09',20,4,101);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_employee values (103,'
+\f3 \'8e\'52\'93\'63\'89\'d4\'8e\'71
+\f0 ','1976-05-21',10,4,101);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_employee values (104,'
+\f3 \'93\'63\'92\'86\'92\'42\'96\'e7
+\f0 ','1978-12-04',30,NULL,102);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_employee values (105,'
+\f3 \'8d\'82\'8b\'b4\'98\'61\'8e\'71
+\f0 ','1980-07-14',30,NULL,103);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> \
+mysql> insert into tbl_salary values (101,325000);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_salary values (102,482000);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_salary values (103,236000);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_salary values (104,184000);\
+Query OK, 1 row affected (0.02 sec)\
+\
+mysql> insert into tbl_salary values (105,145000);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> \
+mysql> insert into tbl_parttimer values (103,'
+\f3 \'8e\'52\'93\'63\'89\'d4\'8e\'71
+\f0 ','1976-05-21',10,101);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_parttimer values (106,'
+\f3 \'96\'d8\'91\'ba\'8f\'72\'88\'ea
+\f0 ','1977-08-13',30,103);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_parttimer values (107,'
+\f3 \'90\'58\'90\'e7\'97\'a2
+\f0 ','1979-02-03',30,103);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> \
+mysql> insert into tbl_period values (1,'2003-04-01','2004-03-31');\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_period values (2,'2004-04-01','2005-03-31');\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_period values (4,'2006-04-01','2007-03-31');\
+Query OK, 1 row affected (0.01 sec)\
+\
+mysql> insert into tbl_period values (5,'2007-04-01','2008-03-31');\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> show tables from pokemon;\
++-------------------+\
+| Tables_in_pokemon |\
++-------------------+\
+| tbl_employee      |\
++-------------------+\
+1 row in set (0.01 sec)\
+\
+mysql> show tabales;\
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tabales' at line 1\
+mysql> show tables;\
++-------------------+\
+| Tables_in_nyuumon |\
++-------------------+\
+| tbl_department    |\
+| tbl_dpt_emp       |\
+| tbl_emp_log       |\
+| tbl_employee      |\
+| tbl_parttimer     |\
+| tbl_period        |\
+| tbl_post          |\
+| tbl_salary        |\
++-------------------+\
+8 rows in set (0.00 sec)\
+\
+mysql> USE nyuumon;\
+Database changed\
+mysql> show table from tbl_department ;\
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from tbl_department' at line 1\
+mysql> show table from tbl_department;\
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from tbl_department' at line 1\
+mysql> show fields from tbl_department;\
++-------+-------------+------+-----+---------+-------+\
+| Field | Type        | Null | Key | Default | Extra |\
++-------+-------------+------+-----+---------+-------+\
+| code  | int(11)     | NO   | PRI | NULL    |       |\
+| name  | varchar(40) | YES  |     | NULL    |       |\
++-------+-------------+------+-----+---------+-------+\
+2 rows in set (0.03 sec)\
+\
+mysql> exit\
+Bye\
+(base) suzukamichiyo@suzukamichiyo ~ % mysql.server stop\
+Shutting down MySQL\
+.. SUCCESS! \
+(base) suzukamichiyo@suzukamichiyo ~ % mysql.server start\
+Starting MySQL\
+ SUCCESS! \
+(base) suzukamichiyo@suzukamichiyo ~ % 2021-09-26T06:48:01.6NZ mysqld_safe A mysqld process already exists\
+\
+(base) suzukamichiyo@suzukamichiyo ~ % mysql.server stop \
+Shutting down MySQL\
+.. SUCCESS! \
+(base) suzukamichiyo@suzukamichiyo ~ % ls\
+9:26_
+\f3 \'8b\'5a\'88\'e7\'93\'57
+\f0 _2.txt			Pictures\
+@home					Public\
+Applications				bin\
+Desktop					include\
+Documents				lib\
+Downloads				ros_ws\
+Google 
+\f3 \'83\'68\'83\'89\'83\'43\'83\'75
+\f0 				src\
+Library					
+\f3 \'8e\'f6\'8b\'c6
+\f0 \
+Movies					
+\f3 \'8c\'a4\'8b\'86
+\f0 \
+Music					
+\f3 \'8e\'a9\'8f\'4b
+\f0 \
+OneDrive - 
+\f3 \'96\'6b\'8b\'e3\'8f\'42\'8e\'73\'97\'a7\'91\'e5\'8a\'77
+\f0 \
+(base) suzukamichiyo@suzukamichiyo ~ %    \
+}
