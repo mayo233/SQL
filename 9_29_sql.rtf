@@ -1,0 +1,615 @@
+{\rtf1\ansi\ansicpg932\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset128 HiraginoSans-W3;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\csgray\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs22 \cf2 \CocoaLigature0 mysql> select\
+    -> code as 
+\f1 \'8e\'d0\'88\'f5\'83\'52\'81\'5b\'83\'68
+\f0 ,\
+    -> name as 
+\f1 \'8e\'d0\'88\'f5\'96\'bc
+\f0 \
+    -> 
+\f1 \'81\'47
+\f0 \
+    -> ;\
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '
+\f1 \'81\'47
+\f0 ' at line 4\
+mysql> show databases;\
++--------------------+\
+| Database           |\
++--------------------+\
+| information_schema |\
+| mysql              |\
+| performance_schema |\
+| test               |\
++--------------------+\
+4 rows in set (0.00 sec)\
+\
+mysql> create database nyuumon;\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> \
+mysql> use nyuumon;\
+Database changed\
+mysql> \
+mysql> create table tbl_department (\
+    ->     code        INTEGER     NOT NULL PRIMARY KEY,\
+    ->     name        VARCHAR(40)\
+    -> );\
+Query OK, 0 rows affected (0.01 sec)\
+\
+mysql> \
+mysql> create table tbl_post (\
+    ->     code        INTEGER     NOT NULL PRIMARY KEY,\
+    ->     name        VARCHAR(40)\
+    -> );\
+Query OK, 0 rows affected (0.01 sec)\
+\
+mysql> \
+mysql> create table tbl_employee (\
+    ->     code        INTEGER     NOT NULL PRIMARY KEY,\
+    ->     name        VARCHAR(40),\
+    ->     birthday    DATE,\
+    ->     dpt_code    INTEGER     NOT NULL,\
+    ->     post_code   INTEGER,\
+    ->     manager     INTEGER,\
+    ->     FOREIGN KEY(dpt_code) REFERENCES tbl_department(code),\
+    ->     FOREIGN KEY(post_code) REFERENCES tbl_post(code)\
+    -> );\
+Query OK, 0 rows affected (0.01 sec)\
+\
+mysql> \
+mysql> create table tbl_emp_log (\
+    ->     code        INTEGER,\
+    ->     name        VARCHAR(40),\
+    ->     birthday    DATE,\
+    ->     dpt_code    INTEGER,\
+    ->     post_code   INTEGER,\
+    ->     manager     INTEGER\
+    -> );\
+Query OK, 0 rows affected (0.01 sec)\
+\
+mysql> \
+mysql> create table tbl_dpt_emp (\
+    ->     dpt_code    INTEGER,\
+    ->     dpt_name    VARCHAR(40),\
+    ->     emp_code    INTEGER,\
+    ->     emp_name    VARCHAR(40)\
+    -> );\
+Query OK, 0 rows affected (0.00 sec)\
+\
+mysql> \
+mysql> create table tbl_salary (\
+    ->     emp_code    INTEGER     NOT NULL PRIMARY KEY,\
+    ->     salary      NUMERIC(14,0)\
+    -> );\
+Query OK, 0 rows affected (0.01 sec)\
+\
+mysql> \
+mysql> create table tbl_parttimer (\
+    ->     code        INTEGER     NOT NULL PRIMARY KEY,\
+    ->     name        VARCHAR(40),\
+    ->     birthday    DATE,\
+    ->     dpt_code    INTEGER     NOT NULL,\
+    ->     manager     INTEGER,\
+    ->     FOREIGN KEY(dpt_code) REFERENCES tbl_department(code)\
+    -> );\
+Query OK, 0 rows affected (0.01 sec)\
+\
+mysql> \
+mysql> create table tbl_period (\
+    ->     period      INTEGER,\
+    ->     start_date  DATE,\
+    ->     end_date    DATE\
+    -> );\
+Query OK, 0 rows affected (0.00 sec)\
+\
+mysql> \
+mysql> insert into tbl_department values (10,'
+\f1 \'91\'8d\'96\'b1\'95\'94
+\f0 ');\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_department values (20,'
+\f1 \'89\'63\'8b\'c6\'95\'94
+\f0 ');\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_department values (30,'
+\f1 \'8a\'4a\'94\'ad\'95\'94
+\f0 ');\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> \
+mysql> insert into tbl_post values (1,'
+\f1 \'8e\'d0\'92\'b7
+\f0 ');\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_post values (2,'
+\f1 \'95\'94\'92\'b7
+\f0 ');\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_post values (3,'
+\f1 \'8e\'9f\'92\'b7
+\f0 ');\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_post values (4,'
+\f1 \'89\'db\'92\'b7
+\f0 ');\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_post values (5,'
+\f1 \'8c\'57\'92\'b7
+\f0 ');\
+Query OK, 1 row affected (0.01 sec)\
+\
+mysql> \
+mysql> insert into tbl_employee values (101,'
+\f1 \'97\'e9\'96\'d8\'88\'ea\'98\'59
+\f0 ','1972-02-01',10,3,NULL);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_employee values (102,'
+\f1 \'8d\'b2\'93\'a1\'89\'68\'8d\'ec
+\f0 ','1974-09-09',20,4,101);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_employee values (103,'
+\f1 \'8e\'52\'93\'63\'89\'d4\'8e\'71
+\f0 ','1976-05-21',10,4,101);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_employee values (104,'
+\f1 \'93\'63\'92\'86\'92\'42\'96\'e7
+\f0 ','1978-12-04',30,NULL,102);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_employee values (105,'
+\f1 \'8d\'82\'8b\'b4\'98\'61\'8e\'71
+\f0 ','1980-07-14',30,NULL,103);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> \
+mysql> insert into tbl_salary values (101,325000);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_salary values (102,482000);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_salary values (103,236000);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_salary values (104,184000);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_salary values (105,145000);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> \
+mysql> insert into tbl_parttimer values (103,'
+\f1 \'8e\'52\'93\'63\'89\'d4\'8e\'71
+\f0 ','1976-05-21',10,101);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_parttimer values (106,'
+\f1 \'96\'d8\'91\'ba\'8f\'72\'88\'ea
+\f0 ','1977-08-13',30,103);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_parttimer values (107,'
+\f1 \'90\'58\'90\'e7\'97\'a2
+\f0 ','1979-02-03',30,103);\
+Query OK, 1 row affected (0.01 sec)\
+\
+mysql> \
+mysql> insert into tbl_period values (1,'2003-04-01','2004-03-31');\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_period values (2,'2004-04-01','2005-03-31');\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_period values (4,'2006-04-01','2007-03-31');\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into tbl_period values (5,'2007-04-01','2008-03-31');\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> show databases;\
++--------------------+\
+| Database           |\
++--------------------+\
+| information_schema |\
+| mysql              |\
+| nyuumon            |\
+| performance_schema |\
+| test               |\
++--------------------+\
+5 rows in set (0.00 sec)\
+\
+mysql> use nyuumon;\
+Database changed\
+mysql> show tables from nyuumon;\
++-------------------+\
+| Tables_in_nyuumon |\
++-------------------+\
+| tbl_department    |\
+| tbl_dpt_emp       |\
+| tbl_emp_log       |\
+| tbl_employee      |\
+| tbl_parttimer     |\
+| tbl_period        |\
+| tbl_post          |\
+| tbl_salary        |\
++-------------------+\
+8 rows in set (0.00 sec)\
+\
+mysql> select\
+    -> code as 
+\f1 \'8e\'d0\'88\'f5\'83\'52\'81\'5b\'83\'68
+\f0 ,\
+    -> name as 
+\f1 \'8e\'d0\'88\'f5\'96\'bc
+\f0 ,\
+    -> case birthday\
+    -> when '1975-01-01' then '
+\f1 \'83\'78\'83\'65\'83\'89\'83\'93
+\f0 '\
+    -> else '
+\f1 \'90\'56\'90\'6c
+\f0 '\
+    -> end as 
+\f1 \'8b\'5a\'97\'ca
+\f0 \
+    -> from tbl_employee\
+    -> ;\
++-----------------+--------------+--------+\
+| 
+\f1 \'8e\'d0\'88\'f5\'83\'52\'81\'5b\'83\'68
+\f0       | 
+\f1 \'8e\'d0\'88\'f5\'96\'bc
+\f0        | 
+\f1 \'8b\'5a\'97\'ca
+\f0    |\
++-----------------+--------------+--------+\
+|             101 | 
+\f1 \'97\'e9\'96\'d8\'88\'ea\'98\'59
+\f0      | 
+\f1 \'90\'56\'90\'6c
+\f0    |\
+|             102 | 
+\f1 \'8d\'b2\'93\'a1\'89\'68\'8d\'ec
+\f0      | 
+\f1 \'90\'56\'90\'6c
+\f0    |\
+|             103 | 
+\f1 \'8e\'52\'93\'63\'89\'d4\'8e\'71
+\f0      | 
+\f1 \'90\'56\'90\'6c
+\f0    |\
+|             104 | 
+\f1 \'93\'63\'92\'86\'92\'42\'96\'e7
+\f0      | 
+\f1 \'90\'56\'90\'6c
+\f0    |\
+|             105 | 
+\f1 \'8d\'82\'8b\'b4\'98\'61\'8e\'71
+\f0      | 
+\f1 \'90\'56\'90\'6c
+\f0    |\
++-----------------+--------------+--------+\
+5 rows in set (0.01 sec)\
+\
+mysql> select\
+    -> code as 
+\f1 \'8e\'d0\'88\'f5\'83\'52\'81\'5b\'83\'68
+\f0 ,\
+    -> name as 
+\f1 \'8e\'d0\'88\'f5\'96\'bc
+\f0 ,\
+    -> case\
+    -> when birthday < '1975-01-01' then '
+\f1 \'83\'78\'83\'65\'83\'89\'83\'93
+\f0 '\
+    -> else '
+\f1 \'90\'56\'90\'6c
+\f0 '\
+    -> from\
+    -> tbl_employee\
+    -> ;\
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from\
+tbl_employee' at line 7\
+mysql> select\
+    -> code as 
+\f1 \'8e\'d0\'88\'f5\'83\'52\'81\'5b\'83\'68
+\f0 ,\
+    -> name as 
+\f1 \'8e\'d0\'88\'f5\'96\'bc
+\f0 ,\
+    ->  case\
+    ->  when birthday < '1975-01-01' then '
+\f1 \'83\'78\'83\'65\'83\'89\'83\'93
+\f0 '\
+    -> else '
+\f1 \'90\'56\'90\'6c
+\f0 '\
+    -> end as 
+\f1 \'8b\'5a\'97\'ca
+\f0 \
+    -> from \
+    -> tbl_employee\
+    -> ;\
++-----------------+--------------+--------------+\
+| 
+\f1 \'8e\'d0\'88\'f5\'83\'52\'81\'5b\'83\'68
+\f0       | 
+\f1 \'8e\'d0\'88\'f5\'96\'bc
+\f0        | 
+\f1 \'8b\'5a\'97\'ca
+\f0          |\
++-----------------+--------------+--------------+\
+|             101 | 
+\f1 \'97\'e9\'96\'d8\'88\'ea\'98\'59
+\f0      | 
+\f1 \'83\'78\'83\'65\'83\'89\'83\'93
+\f0      |\
+|             102 | 
+\f1 \'8d\'b2\'93\'a1\'89\'68\'8d\'ec
+\f0      | 
+\f1 \'83\'78\'83\'65\'83\'89\'83\'93
+\f0      |\
+|             103 | 
+\f1 \'8e\'52\'93\'63\'89\'d4\'8e\'71
+\f0      | 
+\f1 \'90\'56\'90\'6c
+\f0          |\
+|             104 | 
+\f1 \'93\'63\'92\'86\'92\'42\'96\'e7
+\f0      | 
+\f1 \'90\'56\'90\'6c
+\f0          |\
+|             105 | 
+\f1 \'8d\'82\'8b\'b4\'98\'61\'8e\'71
+\f0      | 
+\f1 \'90\'56\'90\'6c
+\f0          |\
++-----------------+--------------+--------------+\
+5 rows in set (0.00 sec)\
+\
+mysql> select\
+    -> dpt.code as dpt_code,\
+    -> dpt.name as dpt_name,\
+    -> emp.code as emp_code,\
+    -> emp.name as emp_name\
+    -> from\
+    -> tbl_employee as emp,\
+    -> tbl_department as dpt\
+    -> where\
+    -> emp.dpt_code=dpt_code\
+    -> order by\
+    -> dpt.code,\
+    -> emp.code;\
++----------+-----------+----------+--------------+\
+| dpt_code | dpt_name  | emp_code | emp_name     |\
++----------+-----------+----------+--------------+\
+|       10 | 
+\f1 \'91\'8d\'96\'b1\'95\'94
+\f0     |      101 | 
+\f1 \'97\'e9\'96\'d8\'88\'ea\'98\'59
+\f0      |\
+|       10 | 
+\f1 \'91\'8d\'96\'b1\'95\'94
+\f0     |      102 | 
+\f1 \'8d\'b2\'93\'a1\'89\'68\'8d\'ec
+\f0      |\
+|       10 | 
+\f1 \'91\'8d\'96\'b1\'95\'94
+\f0     |      103 | 
+\f1 \'8e\'52\'93\'63\'89\'d4\'8e\'71
+\f0      |\
+|       10 | 
+\f1 \'91\'8d\'96\'b1\'95\'94
+\f0     |      104 | 
+\f1 \'93\'63\'92\'86\'92\'42\'96\'e7
+\f0      |\
+|       10 | 
+\f1 \'91\'8d\'96\'b1\'95\'94
+\f0     |      105 | 
+\f1 \'8d\'82\'8b\'b4\'98\'61\'8e\'71
+\f0      |\
+|       20 | 
+\f1 \'89\'63\'8b\'c6\'95\'94
+\f0     |      101 | 
+\f1 \'97\'e9\'96\'d8\'88\'ea\'98\'59
+\f0      |\
+|       20 | 
+\f1 \'89\'63\'8b\'c6\'95\'94
+\f0     |      102 | 
+\f1 \'8d\'b2\'93\'a1\'89\'68\'8d\'ec
+\f0      |\
+|       20 | 
+\f1 \'89\'63\'8b\'c6\'95\'94
+\f0     |      103 | 
+\f1 \'8e\'52\'93\'63\'89\'d4\'8e\'71
+\f0      |\
+|       20 | 
+\f1 \'89\'63\'8b\'c6\'95\'94
+\f0     |      104 | 
+\f1 \'93\'63\'92\'86\'92\'42\'96\'e7
+\f0      |\
+|       20 | 
+\f1 \'89\'63\'8b\'c6\'95\'94
+\f0     |      105 | 
+\f1 \'8d\'82\'8b\'b4\'98\'61\'8e\'71
+\f0      |\
+|       30 | 
+\f1 \'8a\'4a\'94\'ad\'95\'94
+\f0     |      101 | 
+\f1 \'97\'e9\'96\'d8\'88\'ea\'98\'59
+\f0      |\
+|       30 | 
+\f1 \'8a\'4a\'94\'ad\'95\'94
+\f0     |      102 | 
+\f1 \'8d\'b2\'93\'a1\'89\'68\'8d\'ec
+\f0      |\
+|       30 | 
+\f1 \'8a\'4a\'94\'ad\'95\'94
+\f0     |      103 | 
+\f1 \'8e\'52\'93\'63\'89\'d4\'8e\'71
+\f0      |\
+|       30 | 
+\f1 \'8a\'4a\'94\'ad\'95\'94
+\f0     |      104 | 
+\f1 \'93\'63\'92\'86\'92\'42\'96\'e7
+\f0      |\
+|       30 | 
+\f1 \'8a\'4a\'94\'ad\'95\'94
+\f0     |      105 | 
+\f1 \'8d\'82\'8b\'b4\'98\'61\'8e\'71
+\f0      |\
++----------+-----------+----------+--------------+\
+15 rows in set (0.00 sec)\
+\
+mysql> insert into tbl_employee(\
+    -> code,\
+    -> name,\
+    -> birthday,\
+    -> dpt_code,\
+    -> post_code,\
+    -> manager\
+    -> )\
+    -> values(\
+    -> 106,\
+    -> '
+\f1 \'8d\'d6\'93\'a1
+\f0 ',\
+    -> '1982-03-03',\
+    -> 20,\
+    -> NULL,\
+    -> 33\
+    -> );\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> select\
+    -> *\
+    -> from\
+    -> tbl_employee;\
++------+--------------+------------+----------+-----------+---------+\
+| code | name         | birthday   | dpt_code | post_code | manager |\
++------+--------------+------------+----------+-----------+---------+\
+|  101 | 
+\f1 \'97\'e9\'96\'d8\'88\'ea\'98\'59
+\f0      | 1972-02-01 |       10 |         3 |    NULL |\
+|  102 | 
+\f1 \'8d\'b2\'93\'a1\'89\'68\'8d\'ec
+\f0      | 1974-09-09 |       20 |         4 |     101 |\
+|  103 | 
+\f1 \'8e\'52\'93\'63\'89\'d4\'8e\'71
+\f0      | 1976-05-21 |       10 |         4 |     101 |\
+|  104 | 
+\f1 \'93\'63\'92\'86\'92\'42\'96\'e7
+\f0      | 1978-12-04 |       30 |      NULL |     102 |\
+|  105 | 
+\f1 \'8d\'82\'8b\'b4\'98\'61\'8e\'71
+\f0      | 1980-07-14 |       30 |      NULL |     103 |\
+|  106 | 
+\f1 \'8d\'d6\'93\'a1
+\f0          | 1982-03-03 |       20 |      NULL |      33 |\
++------+--------------+------------+----------+-----------+---------+\
+6 rows in set (0.00 sec)\
+\
+mysql> show tables from tbl_department;\
+ERROR 1049 (42000): Unknown database 'tbl_department'\
+mysql> show table from tbl_dapartment;\
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from tbl_dapartment' at line 1\
+mysql> show tables from nyuumon;\
++-------------------+\
+| Tables_in_nyuumon |\
++-------------------+\
+| tbl_department    |\
+| tbl_dpt_emp       |\
+| tbl_emp_log       |\
+| tbl_employee      |\
+| tbl_parttimer     |\
+| tbl_period        |\
+| tbl_post          |\
+| tbl_salary        |\
++-------------------+\
+8 rows in set (0.00 sec)\
+\
+mysql> select \
+    -> *\
+    -> from \
+    -> tbl_department;\
++------+-----------+\
+| code | name      |\
++------+-----------+\
+|   10 | 
+\f1 \'91\'8d\'96\'b1\'95\'94
+\f0     |\
+|   20 | 
+\f1 \'89\'63\'8b\'c6\'95\'94
+\f0     |\
+|   30 | 
+\f1 \'8a\'4a\'94\'ad\'95\'94
+\f0     |\
++------+-----------+\
+3 rows in set (0.00 sec)\
+\
+mysql> insert into tbl_department(\
+    -> code,\
+    -> name\
+    -> )\
+    -> values(\
+    -> 40,\
+    -> '
+\f1 \'8d\'4c\'95\'f1\'95\'94
+\f0 '\
+    -> );\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> select\
+    -> *\
+    -> from \
+    -> tbl_dapartment;\
+ERROR 1146 (42S02): Table 'nyuumon.tbl_dapartment' doesn't exist\
+mysql> selecgt\
+    -> select\
+    -> *\
+    -> from\
+    -> tbl_department;\
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selecgt\
+select\
+*\
+from\
+tbl_department' at line 1\
+mysql> select\
+    -> *\
+    -> from \
+    -> tbl_department;\
++------+-----------+\
+| code | name      |\
++------+-----------+\
+|   10 | 
+\f1 \'91\'8d\'96\'b1\'95\'94
+\f0     |\
+|   20 | 
+\f1 \'89\'63\'8b\'c6\'95\'94
+\f0     |\
+|   30 | 
+\f1 \'8a\'4a\'94\'ad\'95\'94
+\f0     |\
+|   40 | 
+\f1 \'8d\'4c\'95\'f1\'95\'94
+\f0     |\
++------+-----------+\
+4 rows in set (0.00 sec)\
+\
+}
