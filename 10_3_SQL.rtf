@@ -1,0 +1,58 @@
+{\rtf1\ansi\ansicpg932\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\csgray\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs22 \cf2 \CocoaLigature0 Last login: Sat Oct  2 10:32:50 on ttys000\
+suzukamichiyo@suzukamichiyo ~ % mysql.server start\
+Starting MySQL\
+. SUCCESS! \
+suzukamichiyo@suzukamichiyo ~ % mysql -u root     \
+Welcome to the MySQL monitor.  Commands end with ; or \\g.\
+Your MySQL connection id is 2\
+Server version: 5.7.35 Homebrew\
+\
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.\
+\
+Oracle is a registered trademark of Oracle Corporation and/or its\
+affiliates. Other names may be trademarks of their respective\
+owners.\
+\
+Type 'help;' or '\\h' for help. Type '\\c' to clear the current input statement.\
+\
+mysql> select\
+    -> lower('AC');\
++-------------+\
+| lower('AC') |\
++-------------+\
+| ac          |\
++-------------+\
+1 row in set (0.00 sec)\
+\
+mysql> select\
+    -> lower('NC');\
++-------------+\
+| lower('NC') |\
++-------------+\
+| nc          |\
++-------------+\
+1 row in set (0.00 sec)\
+\
+mysql> select\
+    -> upper('aksjdf');\
++-----------------+\
+| upper('aksjdf') |\
++-----------------+\
+| AKSJDF          |\
++-----------------+\
+1 row in set (0.00 sec)\
+\
+mysql> exit;\
+Bye\
+suzukamichiyo@suzukamichiyo ~ % mysql.server stop \
+Shutting down MySQL\
+.. SUCCESS! \
+suzukamichiyo@suzukamichiyo ~ % \
+}
